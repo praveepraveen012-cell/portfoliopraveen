@@ -67,7 +67,7 @@ const About = () => {
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-muted-foreground text-lg max-w-2xl mx-auto"
             >
-              A passionate web designer and WordPress developer with a strong foundation in creating seamless user experiences across diverse platforms.
+              A passionate web developer, UI/UX designer, and digital marketer with a strong foundation in creating seamless user experiences across diverse platforms.
             </motion.p>
           </div>
 
@@ -107,10 +107,10 @@ const About = () => {
               <h3 className="text-2xl font-bold text-foreground mb-6">My Journey</h3>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  As a fresher in web design and development, I bring enthusiasm and a fresh perspective to every project. My experience includes building responsive, high-quality websites using WordPress, HTML, CSS, and JavaScript.
+                  As a web developer and designer with over 1 year of experience, I bring enthusiasm and a fresh perspective to every project. My experience includes building responsive, high-quality websites using modern technologies including HTML, CSS, and JavaScript.
                 </p>
                 <p>
-                  I've completed my Bachelor of Commerce from RVS College of Arts and Science, and I'm certified in WordPress Development and UI/UX Design from Grexotix. My recent project includes a farmstay booking website where I implemented seamless payment integration and created an intuitive user experience.
+                  I've completed my Bachelor of Commerce from RVS College of Arts and Science, and I'm certified in web development and UI/UX Design from Grexotix. I've successfully delivered multiple projects across various industries, creating intuitive user experiences and implementing seamless payment integrations.
                 </p>
                 <p>
                   Beyond development, I'm skilled in graphic design using Adobe Photoshop, Illustrator, and Figma, as well as digital marketing including SEO, Google Ads, Meta Ads, and LinkedIn advertising. I'm always eager to learn new technologies and deliver efficient solutions in collaborative environments.
