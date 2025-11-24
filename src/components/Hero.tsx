@@ -55,7 +55,7 @@ const Hero = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
                 className="text-xl md:text-2xl text-slate-300 mb-8"
               >
-                Web Designer & WordPress Developer
+                Web Developer, UI/UX Designer & Digital Marketer
               </motion.p>
 
               <motion.p
@@ -64,7 +64,7 @@ const Hero = () => {
                 transition={{ delay: 0.5, duration: 0.6 }}
                 className="text-lg text-slate-400 mb-10 leading-relaxed max-w-xl"
               >
-                Creating seamless user experiences with beautiful designs. Specializing in WordPress development, UI/UX design, and digital marketing strategies.
+                Creating seamless user experiences with beautiful designs. Specializing in web development, UI/UX design, and digital marketing strategies.
               </motion.p>
 
               <motion.div
@@ -106,7 +106,7 @@ const Hero = () => {
                 <div className="relative rounded-3xl overflow-hidden border-4 border-primary/20 shadow-2xl">
                   <img
                     src={praveenPhoto}
-                    alt="Praveen - Web Designer & WordPress Developer"
+                    alt="Praveen - Web Developer, UI/UX Designer & Digital Marketer"
                     className="w-full h-auto object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-darker/60 via-transparent to-transparent" />
