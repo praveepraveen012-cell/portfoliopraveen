@@ -57,6 +57,16 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        navy: {
+          darker: "hsl(var(--navy-darker))",
+          dark: "hsl(var(--navy-dark))",
+          medium: "hsl(var(--navy-medium))",
+          light: "hsl(var(--navy-light))",
+        },
+        cyan: {
+          vibrant: "hsl(var(--cyan-vibrant))",
+          light: "hsl(var(--cyan-light))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
