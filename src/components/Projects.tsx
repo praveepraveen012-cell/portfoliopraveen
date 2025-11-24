@@ -10,18 +10,60 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "Farmstay Booking Website",
+      title: "Zignus Group",
       description:
-        "Designed and developed a complete booking platform for a farmstay, enabling users to browse rooms and book online seamlessly. Implemented PhonePe payment integration for secure transactions.",
-      tags: ["WordPress", "HTML/CSS", "JavaScript", "Payment Integration"],
+        "Corporate website for Zignus Group showcasing their business solutions and services with a professional, modern design.",
+      tags: ["WordPress", "HTML/CSS", "JavaScript", "Responsive Design"],
+      icon: ExternalLink,
+      link: "https://zignusgroup.com/",
+    },
+    {
+      title: "SignifyQ",
+      description:
+        "Business website for SignifyQ featuring clean design and intuitive navigation for their service offerings.",
+      tags: ["WordPress", "HTML/CSS", "SEO"],
+      icon: ExternalLink,
+      link: "https://signifyq.com/",
+    },
+    {
+      title: "Kriya Boutique",
+      description:
+        "E-commerce fashion boutique website with elegant design and smooth shopping experience for customers.",
+      tags: ["WordPress", "WooCommerce", "Payment Integration", "Responsive Design"],
       icon: ShoppingCart,
-      duration: "Aug 2024 - Nov 2024",
-      highlights: [
-        "Responsive design for mobile, tablet, and desktop",
-        "Smooth animations and user interactions",
-        "PhonePe payment gateway integration",
-        "WordPress plugin customization",
-      ],
+      link: "https://kriyaboutique.in/",
+    },
+    {
+      title: "Trendsetter Tuni",
+      description:
+        "Fashion retail website with modern aesthetics and user-friendly product browsing capabilities.",
+      tags: ["WordPress", "HTML/CSS", "JavaScript"],
+      icon: ExternalLink,
+      link: "http://trendsettertuni.com/",
+    },
+    {
+      title: "Sivapal Fashions",
+      description:
+        "Online fashion store with comprehensive product catalog and seamless shopping experience.",
+      tags: ["WordPress", "WooCommerce", "Responsive Design"],
+      icon: ShoppingCart,
+      link: "https://sivapalfashions.com/",
+    },
+    {
+      title: "Aayuvera",
+      description:
+        "Wellness and ayurvedic products website with clean design focused on health and natural solutions.",
+      tags: ["WordPress", "E-commerce", "SEO"],
+      icon: ExternalLink,
+      link: "https://aayuvera.com/",
+    },
+    {
+      title: "Jewel Jingles",
+      description:
+        "Jewelry e-commerce website featuring elegant design and smooth product browsing for customers.",
+      tags: ["WordPress", "WooCommerce", "Payment Integration", "Responsive Design"],
+      icon: ShoppingCart,
+      link: "https://jeweljingles.com/",
     },
   ];
 
@@ -55,51 +97,39 @@ const Projects = () => {
           </div>
 
           {/* Projects */}
-          <div className="space-y-8">
+          <div className="grid gap-6 md:gap-8">
             {projects.map((project, index) => (
-              <motion.div
+              <motion.a
                 key={index}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ delay: 0.4 + index * 0.2, duration: 0.6 }}
-                className="group"
+                transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+                className="group block"
               >
-                <div className="bg-card border border-border rounded-3xl p-8 md:p-10 hover:shadow-medium transition-all duration-300">
-                  <div className="flex flex-col md:flex-row gap-8">
+                <div className="bg-card border border-border rounded-2xl p-6 md:p-8 hover:shadow-medium hover:border-primary/50 transition-all duration-300">
+                  <div className="flex flex-col sm:flex-row gap-6">
                     {/* Icon */}
                     <div className="flex-shrink-0">
-                      <div className="w-20 h-20 bg-gradient-to-br from-primary to-orange-400 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <project.icon className="w-10 h-10 text-white" />
+                      <div className="w-16 h-16 bg-gradient-to-br from-primary to-cyan-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <project.icon className="w-8 h-8 text-primary-foreground" />
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <h3 className="text-2xl font-bold text-foreground mb-2">
-                            {project.title}
-                          </h3>
-                          <p className="text-sm text-muted-foreground">{project.duration}</p>
-                        </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                          {project.title}
+                        </h3>
+                        <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 ml-2" />
                       </div>
 
-                      <p className="text-muted-foreground mb-6 leading-relaxed">
+                      <p className="text-muted-foreground mb-4 leading-relaxed">
                         {project.description}
                       </p>
-
-                      {/* Highlights */}
-                      <div className="mb-6">
-                        <h4 className="text-sm font-semibold text-foreground mb-3">Key Features:</h4>
-                        <ul className="space-y-2">
-                          {project.highlights.map((highlight, idx) => (
-                            <li key={idx} className="flex items-start gap-2 text-muted-foreground text-sm">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                              {highlight}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
 
                       {/* Tags */}
                       <div className="flex flex-wrap gap-2">
@@ -107,7 +137,7 @@ const Projects = () => {
                           <Badge
                             key={idx}
                             variant="secondary"
-                            className="bg-secondary hover:bg-secondary/80"
+                            className="bg-secondary hover:bg-secondary/80 text-xs"
                           >
                             {tag}
                           </Badge>
@@ -116,7 +146,7 @@ const Projects = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
 
@@ -124,11 +154,11 @@ const Projects = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
             className="mt-12 text-center"
           >
             <p className="text-muted-foreground">
-              More exciting projects coming soon! Currently working on expanding my portfolio.
+              With over 1 year of professional experience in web design and development, I've successfully delivered multiple projects across various industries.
             </p>
           </motion.div>
         </motion.div>
