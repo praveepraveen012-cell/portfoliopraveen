@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>
+    // Single Page App redirect for GitHub Pages
+    const path = window.location.pathname;
+    const repo = '/portfoliopraveen';
+    if (path.startsWith(repo)) {
+      const newPath = path.slice(repo.length) || '/';
+      sessionStorage.setItem('redirect', newPath);
+    }
+    window.location.replace(window.location.origin + '/portfoliopraveen/');
+  </script>
+</head>
+<body></body>
+</html>
