@@ -24,7 +24,7 @@ const Hero = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-left"
+              className="text-left order-2 md:order-1"
             >
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -96,7 +96,7 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-              className="relative"
+              className="relative order-1 md:order-2"
             >
               <div className="relative w-full max-w-md mx-auto">
                 {/* Glow effect */}
