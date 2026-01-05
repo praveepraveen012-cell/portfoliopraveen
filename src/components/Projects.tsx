@@ -107,9 +107,93 @@ const Projects = () => {
     },
   ];
 
+  // Generate random stars
+  const stars = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    size: Math.random() * 3 + 1,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    duration: Math.random() * 3 + 2,
+    delay: Math.random() * 2,
+  }));
+
   return (
-    <section id="projects" className="py-24 bg-background">
-      <div className="container mx-auto px-4" ref={ref}>
+    <section id="projects" className="py-24 bg-slate-950 relative overflow-hidden">
+      {/* Space background with stars */}
+      <div className="absolute inset-0">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900" />
+        
+        {/* Floating stars */}
+        {stars.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: star.size,
+              height: star.size,
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.3, 1, 0.3],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: star.duration,
+              delay: star.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* Larger glowing orbs */}
+        <motion.div
+          className="absolute w-64 h-64 rounded-full bg-primary/10 blur-3xl"
+          style={{ left: "10%", top: "20%" }}
+          animate={{
+            y: [0, 30, 0],
+            x: [0, 20, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute w-48 h-48 rounded-full bg-cyan-500/10 blur-3xl"
+          style={{ right: "15%", top: "40%" }}
+          animate={{
+            y: [0, -40, 0],
+            x: [0, -15, 0],
+            scale: [1.1, 1, 1.1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute w-32 h-32 rounded-full bg-purple-500/10 blur-2xl"
+          style={{ left: "50%", bottom: "20%" }}
+          animate={{
+            y: [0, 25, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
