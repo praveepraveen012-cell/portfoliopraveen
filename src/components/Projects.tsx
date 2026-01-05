@@ -1,12 +1,19 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { ExternalLink, ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const Projects = () => {
   const ref = useRef(null);
+  const sectionRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  // Parallax scroll setup
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
 
   const projects = [
     {
@@ -107,54 +114,136 @@ const Projects = () => {
     },
   ];
 
-  // Generate random stars
-  const stars = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 3 + 1,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    duration: Math.random() * 3 + 2,
-    delay: Math.random() * 2,
-  }));
+  // Generate random stars with parallax layers (memoized to prevent regeneration)
+  const starLayers = useMemo(() => ({
+    // Slow layer (distant stars)
+    slow: Array.from({ length: 20 }, (_, i) => ({
+      id: `slow-${i}`,
+      size: Math.random() * 1.5 + 0.5,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      duration: Math.random() * 4 + 3,
+      delay: Math.random() * 2,
+    })),
+    // Medium layer
+    medium: Array.from({ length: 20 }, (_, i) => ({
+      id: `medium-${i}`,
+      size: Math.random() * 2 + 1,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      duration: Math.random() * 3 + 2,
+      delay: Math.random() * 2,
+    })),
+    // Fast layer (close stars)
+    fast: Array.from({ length: 15 }, (_, i) => ({
+      id: `fast-${i}`,
+      size: Math.random() * 3 + 2,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      duration: Math.random() * 2 + 1.5,
+      delay: Math.random() * 2,
+    })),
+  }), []);
+
+  // Parallax transforms for different layers
+  const slowY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const mediumY = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const fastY = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  const orbY1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const orbY2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const orbY3 = useTransform(scrollYProgress, [0, 1], [0, -80]);
 
   return (
-    <section id="projects" className="py-24 bg-slate-950 relative overflow-hidden">
-      {/* Space background with stars */}
+    <section ref={sectionRef} id="projects" className="py-24 bg-slate-950 relative overflow-hidden">
+      {/* Space background with parallax stars */}
       <div className="absolute inset-0">
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900" />
         
-        {/* Floating stars */}
-        {stars.map((star) => (
-          <motion.div
-            key={star.id}
-            className="absolute rounded-full bg-white"
-            style={{
-              width: star.size,
-              height: star.size,
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 1, 0.3],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: star.duration,
-              delay: star.delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
+        {/* Slow parallax layer (distant stars) */}
+        <motion.div className="absolute inset-0" style={{ y: slowY }}>
+          {starLayers.slow.map((star) => (
+            <motion.div
+              key={star.id}
+              className="absolute rounded-full bg-white/60"
+              style={{
+                width: star.size,
+                height: star.size,
+                left: `${star.x}%`,
+                top: `${star.y}%`,
+              }}
+              animate={{
+                opacity: [0.2, 0.6, 0.2],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: star.duration,
+                delay: star.delay,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </motion.div>
 
-        {/* Larger glowing orbs */}
+        {/* Medium parallax layer */}
+        <motion.div className="absolute inset-0" style={{ y: mediumY }}>
+          {starLayers.medium.map((star) => (
+            <motion.div
+              key={star.id}
+              className="absolute rounded-full bg-white/80"
+              style={{
+                width: star.size,
+                height: star.size,
+                left: `${star.x}%`,
+                top: `${star.y}%`,
+              }}
+              animate={{
+                opacity: [0.3, 0.9, 0.3],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: star.duration,
+                delay: star.delay,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </motion.div>
+
+        {/* Fast parallax layer (close stars) */}
+        <motion.div className="absolute inset-0" style={{ y: fastY }}>
+          {starLayers.fast.map((star) => (
+            <motion.div
+              key={star.id}
+              className="absolute rounded-full bg-white"
+              style={{
+                width: star.size,
+                height: star.size,
+                left: `${star.x}%`,
+                top: `${star.y}%`,
+                boxShadow: "0 0 6px 2px rgba(255,255,255,0.3)",
+              }}
+              animate={{
+                opacity: [0.5, 1, 0.5],
+                scale: [1, 1.3, 1],
+              }}
+              transition={{
+                duration: star.duration,
+                delay: star.delay,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </motion.div>
+
+        {/* Larger glowing orbs with parallax */}
         <motion.div
           className="absolute w-64 h-64 rounded-full bg-primary/10 blur-3xl"
-          style={{ left: "10%", top: "20%" }}
+          style={{ left: "10%", top: "20%", y: orbY1 }}
           animate={{
-            y: [0, 30, 0],
             x: [0, 20, 0],
             scale: [1, 1.1, 1],
           }}
@@ -166,9 +255,8 @@ const Projects = () => {
         />
         <motion.div
           className="absolute w-48 h-48 rounded-full bg-cyan-500/10 blur-3xl"
-          style={{ right: "15%", top: "40%" }}
+          style={{ right: "15%", top: "40%", y: orbY2 }}
           animate={{
-            y: [0, -40, 0],
             x: [0, -15, 0],
             scale: [1.1, 1, 1.1],
           }}
@@ -180,9 +268,8 @@ const Projects = () => {
         />
         <motion.div
           className="absolute w-32 h-32 rounded-full bg-purple-500/10 blur-2xl"
-          style={{ left: "50%", bottom: "20%" }}
+          style={{ left: "50%", bottom: "20%", y: orbY3 }}
           animate={{
-            y: [0, 25, 0],
             scale: [1, 1.2, 1],
           }}
           transition={{
