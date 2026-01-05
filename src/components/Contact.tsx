@@ -30,10 +30,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-slate-darker via-slate-dark to-slate-darker relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-orange-400/10 rounded-full blur-3xl" />
+    <section id="contact" className="py-24 relative overflow-hidden">
 
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div
