@@ -65,6 +65,46 @@ const Projects = () => {
       icon: ShoppingCart,
       link: "https://jeweljingles.com/",
     },
+    {
+      title: "Conscious Life",
+      description:
+        "Wellness and lifestyle website promoting mindful living with clean, calming design aesthetics.",
+      tags: ["WordPress", "HTML/CSS", "Responsive Design"],
+      icon: ExternalLink,
+      link: "https://vetriveanthan.com/",
+    },
+    {
+      title: "Rise with Nandhini",
+      description:
+        "Personal branding website featuring coaching and mentorship services with inspiring design.",
+      tags: ["WordPress", "HTML/CSS", "SEO"],
+      icon: ExternalLink,
+      link: "https://risewithnandhini.com",
+    },
+    {
+      title: "The Silent Pillar",
+      description:
+        "Professional services website with elegant design showcasing expertise and client testimonials.",
+      tags: ["WordPress", "Responsive Design", "SEO"],
+      icon: ExternalLink,
+      link: "https://www.thesilentpillar.com",
+    },
+    {
+      title: "Evosun",
+      description:
+        "Corporate business website with modern design highlighting innovative solutions and services.",
+      tags: ["WordPress", "HTML/CSS", "JavaScript"],
+      icon: ExternalLink,
+      link: "https://evoosun.com",
+    },
+    {
+      title: "Micro Vision",
+      description:
+        "Gulf-based company website featuring professional design and comprehensive service information.",
+      tags: ["WordPress", "Responsive Design", "SEO"],
+      icon: ExternalLink,
+      link: "http://microvisiongulf.com",
+    },
   ];
 
   return (
