@@ -4,10 +4,12 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import SpaceBackground from "@/components/SpaceBackground";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      <SpaceBackground />
       <Hero />
       <About />
       <Skills />
