@@ -145,6 +145,19 @@ const Projects = () => {
     })),
   }), []);
 
+  // Generate shooting stars
+  const shootingStars = useMemo(() => 
+    Array.from({ length: 5 }, (_, i) => ({
+      id: `shooting-${i}`,
+      startX: Math.random() * 50,
+      startY: Math.random() * 40,
+      angle: Math.random() * 20 + 20, // 20-40 degrees
+      length: Math.random() * 80 + 60, // 60-140px trail
+      duration: Math.random() * 1 + 0.8, // 0.8-1.8s
+      delay: i * 4 + Math.random() * 3, // Staggered with randomness
+    })),
+  []);
+
   // Parallax transforms for different layers
   const slowY = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const mediumY = useTransform(scrollYProgress, [0, 1], [0, -150]);
@@ -278,6 +291,37 @@ const Projects = () => {
             ease: "easeInOut",
           }}
         />
+
+        {/* Shooting stars */}
+        {shootingStars.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute"
+            style={{
+              left: `${star.startX}%`,
+              top: `${star.startY}%`,
+              width: star.length,
+              height: 2,
+              background: `linear-gradient(90deg, transparent, rgba(255,255,255,0.8), white)`,
+              borderRadius: 1,
+              transform: `rotate(${star.angle}deg)`,
+              boxShadow: "0 0 6px 2px rgba(255,255,255,0.4)",
+            }}
+            initial={{ opacity: 0, x: 0, y: 0 }}
+            animate={{
+              opacity: [0, 1, 1, 0],
+              x: [0, 200, 400],
+              y: [0, 100, 200],
+            }}
+            transition={{
+              duration: star.duration,
+              delay: star.delay,
+              repeat: Infinity,
+              repeatDelay: 8 + Math.random() * 6,
+              ease: "easeIn",
+            }}
+          />
+        ))}
       </div>
 
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
