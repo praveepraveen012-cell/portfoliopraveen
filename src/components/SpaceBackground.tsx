@@ -51,6 +51,60 @@ const SpaceBackground = () => {
     })),
   []);
 
+  // Nebula clouds
+  const nebulaClouds = useMemo(() => [
+    {
+      id: "nebula-1",
+      x: 15,
+      y: 20,
+      width: 500,
+      height: 300,
+      colors: ["rgba(99, 102, 241, 0.08)", "rgba(139, 92, 246, 0.05)", "transparent"],
+      rotation: 15,
+      duration: 25,
+    },
+    {
+      id: "nebula-2",
+      x: 60,
+      y: 45,
+      width: 450,
+      height: 350,
+      colors: ["rgba(6, 182, 212, 0.06)", "rgba(34, 211, 238, 0.04)", "transparent"],
+      rotation: -10,
+      duration: 30,
+    },
+    {
+      id: "nebula-3",
+      x: 25,
+      y: 70,
+      width: 400,
+      height: 280,
+      colors: ["rgba(236, 72, 153, 0.05)", "rgba(168, 85, 247, 0.04)", "transparent"],
+      rotation: 25,
+      duration: 22,
+    },
+    {
+      id: "nebula-4",
+      x: 75,
+      y: 15,
+      width: 350,
+      height: 250,
+      colors: ["rgba(249, 115, 22, 0.05)", "rgba(251, 146, 60, 0.03)", "transparent"],
+      rotation: -20,
+      duration: 28,
+    },
+    {
+      id: "nebula-5",
+      x: 50,
+      y: 85,
+      width: 420,
+      height: 300,
+      colors: ["rgba(34, 197, 94, 0.04)", "rgba(6, 182, 212, 0.03)", "transparent"],
+      rotation: 5,
+      duration: 35,
+    },
+  ], []);
+
   // Parallax transforms
   const slowY = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const mediumY = useTransform(scrollYProgress, [0, 1], [0, -500]);
@@ -58,6 +112,7 @@ const SpaceBackground = () => {
   const orbY1 = useTransform(scrollYProgress, [0, 1], [0, -300]);
   const orbY2 = useTransform(scrollYProgress, [0, 1], [0, -600]);
   const orbY3 = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const nebulaY = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
@@ -193,6 +248,35 @@ const SpaceBackground = () => {
           ease: "easeInOut",
         }}
       />
+
+      {/* Nebula clouds */}
+      <motion.div className="absolute inset-0 h-[180vh]" style={{ y: nebulaY }}>
+        {nebulaClouds.map((nebula) => (
+          <motion.div
+            key={nebula.id}
+            className="absolute pointer-events-none"
+            style={{
+              left: `${nebula.x}%`,
+              top: `${nebula.y}%`,
+              width: nebula.width,
+              height: nebula.height,
+              background: `radial-gradient(ellipse at center, ${nebula.colors.join(", ")})`,
+              transform: `translate(-50%, -50%) rotate(${nebula.rotation}deg)`,
+              filter: "blur(40px)",
+            }}
+            animate={{
+              opacity: [0.6, 1, 0.7, 0.9, 0.6],
+              scale: [1, 1.1, 1.05, 1.08, 1],
+              rotate: [nebula.rotation, nebula.rotation + 3, nebula.rotation - 2, nebula.rotation + 1, nebula.rotation],
+            }}
+            transition={{
+              duration: nebula.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </motion.div>
 
       {/* Shooting stars */}
       {shootingStars.map((star) => (
