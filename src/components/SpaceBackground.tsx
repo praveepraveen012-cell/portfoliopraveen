@@ -105,6 +105,76 @@ const SpaceBackground = () => {
     },
   ], []);
 
+  // Distant galaxies
+  const galaxies = useMemo(() => [
+    {
+      id: "galaxy-1",
+      x: 12,
+      y: 25,
+      size: 120,
+      rotation: 35,
+      spiralArms: 3,
+      color: "rgba(147, 112, 219, 0.4)",
+      coreColor: "rgba(255, 255, 255, 0.6)",
+      duration: 60,
+    },
+    {
+      id: "galaxy-2",
+      x: 78,
+      y: 18,
+      size: 80,
+      rotation: -20,
+      spiralArms: 2,
+      color: "rgba(100, 149, 237, 0.35)",
+      coreColor: "rgba(255, 230, 200, 0.5)",
+      duration: 75,
+    },
+    {
+      id: "galaxy-3",
+      x: 45,
+      y: 55,
+      size: 100,
+      rotation: 60,
+      spiralArms: 4,
+      color: "rgba(255, 182, 193, 0.3)",
+      coreColor: "rgba(255, 255, 240, 0.5)",
+      duration: 50,
+    },
+    {
+      id: "galaxy-4",
+      x: 88,
+      y: 72,
+      size: 65,
+      rotation: 15,
+      spiralArms: 2,
+      color: "rgba(64, 224, 208, 0.25)",
+      coreColor: "rgba(255, 255, 255, 0.4)",
+      duration: 80,
+    },
+    {
+      id: "galaxy-5",
+      x: 8,
+      y: 78,
+      size: 90,
+      rotation: -45,
+      spiralArms: 3,
+      color: "rgba(255, 215, 0, 0.2)",
+      coreColor: "rgba(255, 250, 220, 0.5)",
+      duration: 65,
+    },
+    {
+      id: "galaxy-6",
+      x: 55,
+      y: 12,
+      size: 55,
+      rotation: 80,
+      spiralArms: 2,
+      color: "rgba(186, 85, 211, 0.3)",
+      coreColor: "rgba(255, 255, 255, 0.45)",
+      duration: 90,
+    },
+  ], []);
+
   // Parallax transforms
   const slowY = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const mediumY = useTransform(scrollYProgress, [0, 1], [0, -500]);
@@ -113,6 +183,7 @@ const SpaceBackground = () => {
   const orbY2 = useTransform(scrollYProgress, [0, 1], [0, -600]);
   const orbY3 = useTransform(scrollYProgress, [0, 1], [0, -400]);
   const nebulaY = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const galaxyY = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
@@ -275,6 +346,91 @@ const SpaceBackground = () => {
               ease: "easeInOut",
             }}
           />
+        ))}
+      </motion.div>
+
+      {/* Distant galaxies */}
+      <motion.div className="absolute inset-0 h-[160vh]" style={{ y: galaxyY }}>
+        {galaxies.map((galaxy) => (
+          <motion.div
+            key={galaxy.id}
+            className="absolute pointer-events-none"
+            style={{
+              left: `${galaxy.x}%`,
+              top: `${galaxy.y}%`,
+              width: galaxy.size,
+              height: galaxy.size,
+              transform: `translate(-50%, -50%)`,
+            }}
+            animate={{
+              rotate: [galaxy.rotation, galaxy.rotation + 360],
+            }}
+            transition={{
+              duration: galaxy.duration,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          >
+            {/* Galaxy core */}
+            <motion.div
+              className="absolute rounded-full"
+              style={{
+                width: galaxy.size * 0.15,
+                height: galaxy.size * 0.15,
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+                background: `radial-gradient(circle, ${galaxy.coreColor}, transparent)`,
+                boxShadow: `0 0 ${galaxy.size * 0.2}px ${galaxy.size * 0.08}px ${galaxy.coreColor}`,
+              }}
+              animate={{
+                opacity: [0.6, 1, 0.7, 0.9, 0.6],
+                scale: [1, 1.2, 1.1, 1.15, 1],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            {/* Spiral arms */}
+            {Array.from({ length: galaxy.spiralArms }).map((_, armIndex) => (
+              <div
+                key={armIndex}
+                className="absolute"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  transform: `rotate(${(360 / galaxy.spiralArms) * armIndex}deg)`,
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "50%",
+                    height: "30%",
+                    left: "50%",
+                    top: "35%",
+                    background: `linear-gradient(90deg, ${galaxy.color}, transparent)`,
+                    borderRadius: "50% 100% 100% 50%",
+                    filter: `blur(${galaxy.size * 0.05}px)`,
+                    opacity: 0.8,
+                    transform: "rotate(25deg)",
+                  }}
+                />
+              </div>
+            ))}
+            {/* Outer glow */}
+            <div
+              className="absolute rounded-full"
+              style={{
+                width: "100%",
+                height: "100%",
+                background: `radial-gradient(ellipse at center, ${galaxy.color.replace(")", ", 0.15)")}, transparent 70%)`,
+                filter: `blur(${galaxy.size * 0.1}px)`,
+              }}
+            />
+          </motion.div>
         ))}
       </motion.div>
 
