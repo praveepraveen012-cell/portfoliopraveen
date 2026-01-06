@@ -4,7 +4,7 @@ import { useMemo } from "react";
 const SpaceBackground = () => {
   const { scrollYProgress } = useScroll();
 
-  // Generate random stars with parallax layers
+  // Generate random stars with parallax layers and twinkling
   const starLayers = useMemo(() => ({
     slow: Array.from({ length: 40 }, (_, i) => ({
       id: `slow-${i}`,
@@ -13,6 +13,8 @@ const SpaceBackground = () => {
       y: Math.random() * 100,
       duration: Math.random() * 4 + 3,
       delay: Math.random() * 2,
+      twinkle: Math.random() > 0.6,
+      twinkleDuration: Math.random() * 1.5 + 0.5,
     })),
     medium: Array.from({ length: 35 }, (_, i) => ({
       id: `medium-${i}`,
@@ -21,6 +23,8 @@ const SpaceBackground = () => {
       y: Math.random() * 100,
       duration: Math.random() * 3 + 2,
       delay: Math.random() * 2,
+      twinkle: Math.random() > 0.5,
+      twinkleDuration: Math.random() * 1.2 + 0.3,
     })),
     fast: Array.from({ length: 25 }, (_, i) => ({
       id: `fast-${i}`,
@@ -29,6 +33,8 @@ const SpaceBackground = () => {
       y: Math.random() * 100,
       duration: Math.random() * 2 + 1.5,
       delay: Math.random() * 2,
+      twinkle: Math.random() > 0.4,
+      twinkleDuration: Math.random() * 0.8 + 0.2,
     })),
   }), []);
 
@@ -70,12 +76,15 @@ const SpaceBackground = () => {
               left: `${star.x}%`,
               top: `${star.y}%`,
             }}
-            animate={{
+            animate={star.twinkle ? {
+              opacity: [0.1, 0.6, 0.1, 0.8, 0.2],
+              scale: [1, 1.3, 1, 1.2, 1],
+            } : {
               opacity: [0.2, 0.5, 0.2],
               scale: [1, 1.1, 1],
             }}
             transition={{
-              duration: star.duration,
+              duration: star.twinkle ? star.twinkleDuration : star.duration,
               delay: star.delay,
               repeat: Infinity,
               ease: "easeInOut",
@@ -96,12 +105,15 @@ const SpaceBackground = () => {
               left: `${star.x}%`,
               top: `${star.y}%`,
             }}
-            animate={{
+            animate={star.twinkle ? {
+              opacity: [0.2, 1, 0.3, 0.9, 0.2],
+              scale: [1, 1.4, 1.1, 1.3, 1],
+            } : {
               opacity: [0.3, 0.8, 0.3],
               scale: [1, 1.2, 1],
             }}
             transition={{
-              duration: star.duration,
+              duration: star.twinkle ? star.twinkleDuration : star.duration,
               delay: star.delay,
               repeat: Infinity,
               ease: "easeInOut",
@@ -121,14 +133,19 @@ const SpaceBackground = () => {
               height: star.size,
               left: `${star.x}%`,
               top: `${star.y}%`,
-              boxShadow: "0 0 6px 2px rgba(255,255,255,0.3)",
+              boxShadow: star.twinkle 
+                ? "0 0 8px 3px rgba(255,255,255,0.5)" 
+                : "0 0 6px 2px rgba(255,255,255,0.3)",
             }}
-            animate={{
+            animate={star.twinkle ? {
+              opacity: [0.3, 1, 0.4, 1, 0.3],
+              scale: [1, 1.5, 1.1, 1.4, 1],
+            } : {
               opacity: [0.5, 1, 0.5],
               scale: [1, 1.3, 1],
             }}
             transition={{
-              duration: star.duration,
+              duration: star.twinkle ? star.twinkleDuration : star.duration,
               delay: star.delay,
               repeat: Infinity,
               ease: "easeInOut",
