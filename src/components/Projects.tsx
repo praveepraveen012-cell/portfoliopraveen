@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, ShoppingCart } from "lucide-react";
+import { ExternalLink, ShoppingCart, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const Projects = () => {
@@ -115,6 +115,51 @@ const Projects = () => {
     },
   ];
 
+  const seoProjects = [
+    {
+      title: "Zignus",
+      description:
+        "Comprehensive SEO optimization including keyword research, on-page SEO, and technical improvements.",
+      tags: ["On-Page SEO", "Keyword Research", "Technical SEO"],
+      link: "https://zignusgroup.com/",
+    },
+    {
+      title: "Reclaim Her",
+      description:
+        "SEO strategy focused on wellness and women's health keywords with content optimization.",
+      tags: ["On-Page SEO", "Content Optimization", "Local SEO"],
+      link: "https://reclaimher.in/",
+    },
+    {
+      title: "Rise With Nandhini",
+      description:
+        "Personal branding SEO with focus on coaching and mentorship related search terms.",
+      tags: ["On-Page SEO", "Personal Branding", "Keyword Research"],
+      link: "https://risewithnandhini.com",
+    },
+    {
+      title: "The Silent Pillar",
+      description:
+        "Professional services SEO optimization for improved search visibility and organic traffic.",
+      tags: ["On-Page SEO", "Technical SEO", "Analytics"],
+      link: "https://www.thesilentpillar.com",
+    },
+    {
+      title: "The Radiant Path",
+      description:
+        "Wellness-focused SEO strategy with spiritual and holistic health keyword targeting.",
+      tags: ["On-Page SEO", "Content Strategy", "Keyword Research"],
+      link: "#",
+    },
+    {
+      title: "The Conscious Life",
+      description:
+        "Mindful living and wellness SEO with focus on organic search growth and engagement.",
+      tags: ["On-Page SEO", "Content Optimization", "Technical SEO"],
+      link: "https://vetriveanthan.com/",
+    },
+  ];
+
   return (
     <section id="projects" className="py-24 relative">
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
@@ -198,15 +243,95 @@ const Projects = () => {
             ))}
           </div>
 
+          {/* SEO Projects Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="mt-20"
+          >
+            <div className="text-center mb-12">
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ delay: 0.9, duration: 0.6 }}
+                className="text-primary font-semibold text-sm tracking-wider uppercase"
+              >
+                Search Engine Optimization
+              </motion.span>
+              <motion.h3
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ delay: 1.0, duration: 0.6 }}
+                className="text-3xl md:text-4xl font-bold text-foreground mt-2"
+              >
+                Basic SEO Projects
+              </motion.h3>
+            </div>
+
+            <div className="grid gap-4 md:gap-6 md:grid-cols-2">
+              {seoProjects.map((project, index) => (
+                <motion.a
+                  key={index}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ delay: 1.1 + index * 0.1, duration: 0.5 }}
+                  className="group block"
+                >
+                  <div className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-5 md:p-6 hover:shadow-medium hover:border-primary/50 transition-all duration-300 h-full">
+                    <div className="flex items-start gap-4">
+                      {/* Icon */}
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-400 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <Search className="w-6 h-6 text-primary-foreground" />
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between mb-2">
+                          <h4 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+                            {project.title}
+                          </h4>
+                          <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0 ml-2" />
+                        </div>
+
+                        <p className="text-muted-foreground text-sm mb-3 leading-relaxed">
+                          {project.description}
+                        </p>
+
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.tags.map((tag, idx) => (
+                            <Badge
+                              key={idx}
+                              variant="secondary"
+                              className="bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 text-xs border-emerald-500/20"
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Additional info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
+            transition={{ delay: 1.8, duration: 0.6 }}
             className="mt-12 text-center"
           >
             <p className="text-muted-foreground">
-              With over 1 year of professional experience in web design and development, I've successfully delivered multiple projects across various industries.
+              With over 1 year of professional experience in web design, development, and SEO, I've successfully delivered multiple projects across various industries.
             </p>
           </motion.div>
         </motion.div>
