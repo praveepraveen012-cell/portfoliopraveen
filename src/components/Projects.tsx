@@ -105,6 +105,14 @@ const Projects = () => {
       icon: ExternalLink,
       link: "http://microvisiongulf.com",
     },
+    {
+      title: "Reclaim Her",
+      description:
+        "Empowering women's wellness platform with inspiring design focused on health, self-care, and personal transformation.",
+      tags: ["WordPress", "Responsive Design", "SEO", "Wellness"],
+      icon: ExternalLink,
+      link: "https://reclaimher.in/",
+    },
   ];
 
   return (
