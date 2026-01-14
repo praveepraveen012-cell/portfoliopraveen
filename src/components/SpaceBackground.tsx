@@ -1,46 +1,58 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 
 const SpaceBackground = () => {
   const { scrollYProgress } = useScroll();
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile for performance optimization
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Reduce element counts on mobile for better performance
+  const starCounts = isMobile ? { slow: 15, medium: 12, fast: 8 } : { slow: 40, medium: 35, fast: 25 };
 
   // Generate random stars with parallax layers and twinkling
   const starLayers = useMemo(() => ({
-    slow: Array.from({ length: 40 }, (_, i) => ({
+    slow: Array.from({ length: starCounts.slow }, (_, i) => ({
       id: `slow-${i}`,
       size: Math.random() * 1.5 + 0.5,
       x: Math.random() * 100,
       y: Math.random() * 100,
       duration: Math.random() * 4 + 3,
       delay: Math.random() * 2,
-      twinkle: Math.random() > 0.6,
+      twinkle: !isMobile && Math.random() > 0.6,
       twinkleDuration: Math.random() * 1.5 + 0.5,
     })),
-    medium: Array.from({ length: 35 }, (_, i) => ({
+    medium: Array.from({ length: starCounts.medium }, (_, i) => ({
       id: `medium-${i}`,
       size: Math.random() * 2 + 1,
       x: Math.random() * 100,
       y: Math.random() * 100,
       duration: Math.random() * 3 + 2,
       delay: Math.random() * 2,
-      twinkle: Math.random() > 0.5,
+      twinkle: !isMobile && Math.random() > 0.5,
       twinkleDuration: Math.random() * 1.2 + 0.3,
     })),
-    fast: Array.from({ length: 25 }, (_, i) => ({
+    fast: Array.from({ length: starCounts.fast }, (_, i) => ({
       id: `fast-${i}`,
       size: Math.random() * 3 + 2,
       x: Math.random() * 100,
       y: Math.random() * 100,
       duration: Math.random() * 2 + 1.5,
       delay: Math.random() * 2,
-      twinkle: Math.random() > 0.4,
+      twinkle: !isMobile && Math.random() > 0.4,
       twinkleDuration: Math.random() * 0.8 + 0.2,
     })),
-  }), []);
+  }), [isMobile, starCounts.slow, starCounts.medium, starCounts.fast]);
 
-  // Shooting stars
+  // Shooting stars - fewer on mobile
   const shootingStars = useMemo(() =>
-    Array.from({ length: 6 }, (_, i) => ({
+    Array.from({ length: isMobile ? 2 : 6 }, (_, i) => ({
       id: `shooting-${i}`,
       startX: Math.random() * 60 + 10,
       startY: Math.random() * 30,
@@ -49,7 +61,7 @@ const SpaceBackground = () => {
       duration: Math.random() * 1.2 + 0.6,
       delay: i * 5 + Math.random() * 4,
     })),
-  []);
+  [isMobile]);
 
   // Nebula clouds
   const nebulaClouds = useMemo(() => [
@@ -175,20 +187,72 @@ const SpaceBackground = () => {
     },
   ], []);
 
-  // Parallax transforms
-  const slowY = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const mediumY = useTransform(scrollYProgress, [0, 1], [0, -500]);
-  const fastY = useTransform(scrollYProgress, [0, 1], [0, -900]);
-  const orbY1 = useTransform(scrollYProgress, [0, 1], [0, -300]);
-  const orbY2 = useTransform(scrollYProgress, [0, 1], [0, -600]);
-  const orbY3 = useTransform(scrollYProgress, [0, 1], [0, -400]);
-  const nebulaY = useTransform(scrollYProgress, [0, 1], [0, -150]);
-  const galaxyY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  // Parallax transforms - reduced on mobile for smoother scrolling
+  const parallaxMultiplier = isMobile ? 0.3 : 1;
+  const slowY = useTransform(scrollYProgress, [0, 1], [0, -200 * parallaxMultiplier]);
+  const mediumY = useTransform(scrollYProgress, [0, 1], [0, -500 * parallaxMultiplier]);
+  const fastY = useTransform(scrollYProgress, [0, 1], [0, -900 * parallaxMultiplier]);
+  const orbY1 = useTransform(scrollYProgress, [0, 1], [0, -300 * parallaxMultiplier]);
+  const orbY2 = useTransform(scrollYProgress, [0, 1], [0, -600 * parallaxMultiplier]);
+  const orbY3 = useTransform(scrollYProgress, [0, 1], [0, -400 * parallaxMultiplier]);
+  const nebulaY = useTransform(scrollYProgress, [0, 1], [0, -150 * parallaxMultiplier]);
+  const galaxyY = useTransform(scrollYProgress, [0, 1], [0, -100 * parallaxMultiplier]);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div className="fixed inset-0 -z-10 overflow-hidden" style={{ willChange: "auto" }}>
       {/* Base gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-slate-950 to-background" />
+
+      {/* Skip complex elements on mobile for performance */}
+      {isMobile ? (
+        <>
+          {/* Simplified static stars for mobile */}
+          <div className="absolute inset-0">
+            {starLayers.slow.map((star) => (
+              <div
+                key={star.id}
+                className="absolute rounded-full bg-white/50"
+                style={{
+                  width: star.size,
+                  height: star.size,
+                  left: `${star.x}%`,
+                  top: `${star.y}%`,
+                }}
+              />
+            ))}
+            {starLayers.medium.map((star) => (
+              <div
+                key={star.id}
+                className="absolute rounded-full bg-white/70"
+                style={{
+                  width: star.size,
+                  height: star.size,
+                  left: `${star.x}%`,
+                  top: `${star.y}%`,
+                }}
+              />
+            ))}
+            {starLayers.fast.map((star) => (
+              <div
+                key={star.id}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: star.size,
+                  height: star.size,
+                  left: `${star.x}%`,
+                  top: `${star.y}%`,
+                  boxShadow: "0 0 4px 1px rgba(255,255,255,0.3)",
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Simple orbs for mobile */}
+          <div className="absolute w-64 h-64 rounded-full bg-primary/8 blur-3xl" style={{ left: "5%", top: "10%" }} />
+          <div className="absolute w-48 h-48 rounded-full bg-cyan-500/8 blur-3xl" style={{ right: "10%", top: "35%" }} />
+        </>
+      ) : (
+        <>
 
       {/* Slow parallax layer */}
       <motion.div className="absolute inset-0 h-[200vh]" style={{ y: slowY }}>
@@ -464,6 +528,8 @@ const SpaceBackground = () => {
           }}
         />
       ))}
+      </>
+      )}
     </div>
   );
 };
