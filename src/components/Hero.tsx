@@ -16,15 +16,16 @@ const Hero = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left content */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="text-left order-2 md:order-1"
+              style={{ willChange: "transform, opacity" }}
             >
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
+                transition={{ delay: 0.15, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="inline-block mb-4"
               >
                 <span className="px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium">
@@ -33,9 +34,9 @@ const Hero = () => {
               </motion.div>
 
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
+                transition={{ delay: 0.2, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
               >
                 Hi, I'm{" "}
@@ -45,27 +46,27 @@ const Hero = () => {
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                transition={{ delay: 0.25, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="text-xl md:text-2xl text-slate-300 mb-8"
               >
                 Web Developer, UI/UX Designer & Digital Marketer
               </motion.p>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
+                transition={{ delay: 0.3, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="text-lg text-slate-400 mb-10 leading-relaxed max-w-xl"
               >
                 Creating seamless user experiences with beautiful designs. Specializing in web development, UI/UX design, and digital marketing strategies.
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
+                transition={{ delay: 0.35, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="flex flex-wrap gap-4"
               >
                 <Button
@@ -88,10 +89,11 @@ const Hero = () => {
 
             {/* Right content - Image */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: 0.2, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="relative order-1 md:order-2"
+              style={{ willChange: "transform, opacity" }}
             >
               <div className="relative w-full max-w-md mx-auto">
                 {/* Glow effect */}
@@ -118,12 +120,12 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
+            transition={{ delay: 0.6, duration: 0.4 }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2"
           >
             <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="flex flex-col items-center gap-2 text-slate-400"
             >
               <span className="text-sm">Scroll to explore</span>
