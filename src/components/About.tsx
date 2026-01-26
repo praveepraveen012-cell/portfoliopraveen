@@ -107,7 +107,7 @@ const About = () => {
                   As a web developer and designer with over 1 year of experience, I bring enthusiasm and a fresh perspective to every project. My experience includes building responsive, high-quality websites using modern technologies including HTML, CSS, and JavaScript.
                 </p>
                 <p>
-                  I've completed my Bachelor of Commerce from RVS College of Arts and Science, and I'm certified in web development and UI/UX Design from Grexotix. I've successfully delivered multiple projects across various industries, creating intuitive user experiences and implementing seamless payment integrations.
+                  I've completed my Bachelor of Commerce from RVS College of Arts and Science, and I'm certified in Web Development and Digital Marketing from Grexotix. Additionally, I'm proficient in UI/UX Design, crafting intuitive user experiences using industry-standard tools. I've successfully delivered multiple projects across various industries, implementing seamless payment integrations and user-centric designs.
                 </p>
                 <p>
                   Beyond development, I'm skilled in graphic design using Adobe Photoshop, Illustrator, and Figma, as well as digital marketing including SEO, Google Ads, Meta Ads, and LinkedIn advertising. I'm always eager to learn new technologies and deliver efficient solutions in collaborative environments.
