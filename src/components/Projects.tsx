@@ -164,25 +164,25 @@ const Projects = () => {
     <section id="projects" className="py-24 relative">
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="max-w-6xl mx-auto"
         >
           {/* Section header */}
           <div className="text-center mb-16">
             <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+              transition={{ delay: 0.1, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="text-primary font-semibold text-sm tracking-wider uppercase"
             >
               Featured Work
             </motion.span>
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+              transition={{ delay: 0.15, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="text-4xl md:text-5xl font-bold text-foreground mt-2"
             >
               Recent Projects
@@ -197,9 +197,9 @@ const Projects = () => {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ delay: 0.2 + index * 0.05, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="group block"
               >
                 <div className="bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-6 md:p-8 hover:shadow-medium hover:border-primary/50 transition-all duration-300">
@@ -245,24 +245,24 @@ const Projects = () => {
 
           {/* SEO Projects Section */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ delay: 0.4, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="mt-20"
           >
             <div className="text-center mb-12">
               <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: 0.9, duration: 0.6 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+                transition={{ delay: 0.45, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="text-primary font-semibold text-sm tracking-wider uppercase"
               >
                 Search Engine Optimization
               </motion.span>
               <motion.h3
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: 1.0, duration: 0.6 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+                transition={{ delay: 0.5, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="text-3xl md:text-4xl font-bold text-foreground mt-2"
               >
                 Basic SEO Projects
@@ -276,9 +276,9 @@ const Projects = () => {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ delay: 1.1 + index * 0.1, duration: 0.5 }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+                  transition={{ delay: 0.55 + index * 0.04, duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
                   className="group block"
                 >
                   <div className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-5 md:p-6 hover:shadow-medium hover:border-primary/50 transition-all duration-300 h-full">
@@ -325,9 +325,9 @@ const Projects = () => {
 
           {/* Additional info */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 1.8, duration: 0.6 }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ delay: 0.7, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="mt-12 text-center"
           >
             <p className="text-muted-foreground">

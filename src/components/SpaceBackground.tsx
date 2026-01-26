@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useMemo, useEffect, useState } from "react";
 
 const SpaceBackground = () => {
@@ -187,19 +187,32 @@ const SpaceBackground = () => {
     },
   ], []);
 
+  // Spring config for smoother animations
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+
   // Parallax transforms - reduced on mobile for smoother scrolling
   const parallaxMultiplier = isMobile ? 0.3 : 1;
-  const slowY = useTransform(scrollYProgress, [0, 1], [0, -200 * parallaxMultiplier]);
-  const mediumY = useTransform(scrollYProgress, [0, 1], [0, -500 * parallaxMultiplier]);
-  const fastY = useTransform(scrollYProgress, [0, 1], [0, -900 * parallaxMultiplier]);
-  const orbY1 = useTransform(scrollYProgress, [0, 1], [0, -300 * parallaxMultiplier]);
-  const orbY2 = useTransform(scrollYProgress, [0, 1], [0, -600 * parallaxMultiplier]);
-  const orbY3 = useTransform(scrollYProgress, [0, 1], [0, -400 * parallaxMultiplier]);
-  const nebulaY = useTransform(scrollYProgress, [0, 1], [0, -150 * parallaxMultiplier]);
-  const galaxyY = useTransform(scrollYProgress, [0, 1], [0, -100 * parallaxMultiplier]);
+  const slowYRaw = useTransform(scrollYProgress, [0, 1], [0, -200 * parallaxMultiplier]);
+  const mediumYRaw = useTransform(scrollYProgress, [0, 1], [0, -500 * parallaxMultiplier]);
+  const fastYRaw = useTransform(scrollYProgress, [0, 1], [0, -900 * parallaxMultiplier]);
+  const orbY1Raw = useTransform(scrollYProgress, [0, 1], [0, -300 * parallaxMultiplier]);
+  const orbY2Raw = useTransform(scrollYProgress, [0, 1], [0, -600 * parallaxMultiplier]);
+  const orbY3Raw = useTransform(scrollYProgress, [0, 1], [0, -400 * parallaxMultiplier]);
+  const nebulaYRaw = useTransform(scrollYProgress, [0, 1], [0, -150 * parallaxMultiplier]);
+  const galaxyYRaw = useTransform(scrollYProgress, [0, 1], [0, -100 * parallaxMultiplier]);
+
+  // Apply springs for smoother motion on desktop
+  const slowY = useSpring(slowYRaw, springConfig);
+  const mediumY = useSpring(mediumYRaw, springConfig);
+  const fastY = useSpring(fastYRaw, springConfig);
+  const orbY1 = useSpring(orbY1Raw, springConfig);
+  const orbY2 = useSpring(orbY2Raw, springConfig);
+  const orbY3 = useSpring(orbY3Raw, springConfig);
+  const nebulaY = useSpring(nebulaYRaw, springConfig);
+  const galaxyY = useSpring(galaxyYRaw, springConfig);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden" style={{ willChange: "auto" }}>
+    <div className="fixed inset-0 -z-10 overflow-hidden" style={{ willChange: "transform" }}>
       {/* Base gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-slate-950 to-background" />
 
