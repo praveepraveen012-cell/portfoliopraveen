@@ -76,18 +76,27 @@ const About = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
-                className="group"
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group cursor-pointer"
               >
-                <div className="bg-card border border-border rounded-2xl p-6 h-full hover:shadow-medium transition-all duration-300 hover:-translate-y-1">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <item.icon className="w-6 h-6 text-primary" />
+                <div className="relative bg-card border border-border rounded-2xl p-6 h-full transition-all duration-500 ease-out overflow-hidden group-hover:border-primary/30 group-hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.25)]">
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Icon container with enhanced animation */}
+                  <div className="relative w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 group-hover:bg-primary/20 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-primary/20">
+                    <item.icon className="w-6 h-6 text-primary transition-transform duration-500 group-hover:scale-110" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                  
+                  <h3 className="relative text-lg font-semibold text-foreground mb-2 transition-colors duration-300 group-hover:text-primary">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="relative text-muted-foreground text-sm transition-colors duration-300 group-hover:text-foreground/80">
                     {item.description}
                   </p>
+                  
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center" />
                 </div>
               </motion.div>
             ))}
