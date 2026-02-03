@@ -25,7 +25,7 @@ const Contact = () => {
       icon: Linkedin,
       label: "LinkedIn",
       value: "Connect with me",
-      link: "https://www.linkedin.com/in/praveen-a",
+      link: "https://www.linkedin.com/in/praveen-alagesan/",
     },
   ];
 
