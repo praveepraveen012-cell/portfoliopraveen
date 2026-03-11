@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, ShoppingCart, Search } from "lucide-react";
+import { ExternalLink, ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const Projects = () => {
