@@ -115,50 +115,6 @@ const Projects = () => {
     },
   ];
 
-  const seoProjects = [
-    {
-      title: "Zignus",
-      description:
-        "Comprehensive SEO optimization including keyword research, on-page SEO, and technical improvements.",
-      tags: ["On-Page SEO", "Keyword Research", "Technical SEO"],
-      link: "https://zignusgroup.com/",
-    },
-    {
-      title: "Reclaim Her",
-      description:
-        "SEO strategy focused on wellness and women's health keywords with content optimization.",
-      tags: ["On-Page SEO", "Content Optimization", "Local SEO"],
-      link: "https://reclaimher.in/",
-    },
-    {
-      title: "Rise With Nandhini",
-      description:
-        "Personal branding SEO with focus on coaching and mentorship related search terms.",
-      tags: ["On-Page SEO", "Personal Branding", "Keyword Research"],
-      link: "https://risewithnandhini.com",
-    },
-    {
-      title: "The Silent Pillar",
-      description:
-        "Professional services SEO optimization for improved search visibility and organic traffic.",
-      tags: ["On-Page SEO", "Technical SEO", "Analytics"],
-      link: "https://www.thesilentpillar.com",
-    },
-    {
-      title: "The Radiant Path",
-      description:
-        "Wellness-focused SEO strategy with spiritual and holistic health keyword targeting.",
-      tags: ["On-Page SEO", "Content Strategy", "Keyword Research"],
-      link: "#",
-    },
-    {
-      title: "The Conscious Life",
-      description:
-        "Mindful living and wellness SEO with focus on organic search growth and engagement.",
-      tags: ["On-Page SEO", "Content Optimization", "Technical SEO"],
-      link: "https://vetriveanthan.com/",
-    },
-  ];
 
   return (
     <section id="projects" className="py-24 relative">
